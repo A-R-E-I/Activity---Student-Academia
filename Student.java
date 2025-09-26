@@ -6,79 +6,99 @@ public class Student
 {
 	Scanner input = new Scanner(System.in);
 	
-	private String firstStudent;
-	private String firstlast;
-	private String secondStudent;
-	private String secondlast;
-	private int initialGradeJohn;
-	private int initialGradeSunny;
+	private String firstname;
+	private String lastname;
+	private double num1;
+	private double num2;
+	private double GPA;
 	
-	
-	
-	public Student(String student1, String lastname1, String student2, String lastname2, int grade, int grade2) 
+	public Student(String fname, String lname) 
 	{
-		this.firstStudent = student1;
-		this.firstlast = lastname1;
-		this.secondStudent = student2;
-		this.secondlast = lastname2;
-		this.initialGradeJohn = grade;
-		this.initialGradeSunny = grade2;
+		this.firstname = fname;
+		this.lastname = lname;
 	}
 	
 	public String getName() 
 	{
 		String nameOne;
-		nameOne = firstStudent + " " + firstlast;
+		nameOne = firstname + " " + lastname;
 		return nameOne;
 	}
 	
-	public String getName2() 
-	{
-		String nameTwo;
-		nameTwo = secondStudent + " " + secondlast;
-		return nameTwo;
-	}
-	
-	public int getGradelvl1()
+	public int getGradelvl()
 	{
 		System.out.print("Enter current grade level for " + getName() + ": ");
-		int gradelvl1 = input.nextInt();
-		
-		return gradelvl1;
-	}
-	
-	public int getGradelvl2()
-	{
-		System.out.print("Enter current grade level for " + getName2() + ": ");
-		int gradelvl2 = input.nextInt();
-		
-		return gradelvl2;
+		int gradelvl = input.nextInt();
+		return gradelvl;
 	}
 	
 	public String getGPA()
 	{
-		System.out.print("Enter math grade: ");
-		int num1 = input.nextInt();
+		System.out.print("Enter GPA: ");
+		num1 = input.nextInt();
 		
-		System.out.print("Enter history grade: ");
-		int num2 = input.nextInt();
+		String x = CalcGPA(num1);
 		
-		System.out.print("Enter science grade: ");
-		int num3 = input.nextInt();
-		
-		System.out.print("Enter english grade: ");
-		int num4 = input.nextInt();
-		
-		int sum = num1 + num2 + num3 + num4;
-		double GPA = sum / 4;
-		double ChangeGPA = GPA / 100;
-		double newGPA = ChangeGPA * 4;
-		
-		String DisplayGPA = "GPA: " + GPA + "\n" + "GPA 4.0 scale: " + newGPA; 
-		
-		return DisplayGPA;
+		return x;
 	}
-
-
+	
+	
+	
+	public String updateGPA()
+	{
+		System.out.print("Enter new GPA: ");
+		num2 = input.nextInt();
+		
+		double NewNum = num1 + num2;
+		double AveNum = NewNum / 2;
+		
+		String x = CalcGPA(AveNum);
+		
+		return x;	
+	}
+	
+	public String CalcGPA(double Entnum)
+	{
+		double ChangeGPA = Entnum / 100;
+		GPA = ChangeGPA * 4;
+		String ShowGPA = "GPA: " +  Entnum + "\n" + "4.0 scale GPA: " + GPA;
+		
+		return ShowGPA;
+	}
+	
+	public String isHonorRoll()
+	{
+		if(GPA >= 3.5)
+		{
+			String DeclareHonor = getName() + " is in honor roll.";
+			return DeclareHonor;
+		}
+		else
+		{
+			String DeclareHonor = getName() + " is not in honor roll.";
+			return DeclareHonor;
+		}
+	}
+	
+	public String promote()
+	{
+		if(num1 >= 65)
+		{
+			return "grade level increased";
+		}
+		else
+		{
+			return "grade failed";
+		}
+	}
+	
+	
+	
+	public String Output()
+	{
+		String s = "";
+		s += "Name: " + getName() + "\n" + "Grade: " + getGradelvl() + "\n" + getGPA() + "\n" + isHonorRoll() + "\n" + promote() + "\n" + "|UPDATED|" + "\n" + updateGPA();
+		return s;	
+	}
 	
 }
